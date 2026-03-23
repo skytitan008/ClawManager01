@@ -139,6 +139,21 @@ jobs:
               flags=re.S,
           )
 
+          text = re.sub(
+              r"(kind: Service\s+metadata:\s+name: clawmanager-frontend\s+namespace: clawmanager-system\s+spec:\s+)type: NodePort",
+              r"\1type: ClusterIP",
+              text,
+              count=1,
+              flags=re.S,
+          )
+
+          text = re.sub(
+              r"\n\s+nodePort:\s+39443",
+              "",
+              text,
+              count=1,
+          )
+
           path.write_text(text, encoding="utf-8")
           PY
 
